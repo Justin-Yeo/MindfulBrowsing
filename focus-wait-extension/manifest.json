@@ -1,0 +1,21 @@
+{
+    "manifest_version": 3,
+    "name": "MindfulBrowsing",
+    "version": "1.0",
+    "description": "Increase productivity by adding a wait time or challenge before accessing distracting websites.",
+    "permissions": [
+      "storage",
+      "tabs"
+    ],
+    "host_permissions": [
+      "<all_urls>"
+    ],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "options_page": "options.html",
+    "action": {
+      "default_title": "Focus Wait"
+    }
+  }
+  
