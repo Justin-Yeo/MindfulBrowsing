@@ -5,17 +5,47 @@
     <title>Challenge</title>
     <style>
       body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-      #message { font-size: 1.2em; }
-      #challengeBox { margin-top: 20px; }
+      #message { font-size: 1.2em; margin-bottom: 20px; }
+      .challenge-box { margin-top: 20px; display: none; }
+      #typingText { 
+        font-size: 1.1em; 
+        margin: 20px auto;
+        max-width: 600px;
+        line-height: 1.6;
+        text-align: left;
+        background: #f5f5f5;
+        padding: 20px;
+        border-radius: 8px;
+      }
+      #typingInput {
+        width: 90%;
+        max-width: 600px;
+        height: 100px;
+        margin: 10px auto;
+        padding: 10px;
+        font-size: 1em;
+        resize: none;
+      }
+      .error { color: red; }
+      .success { color: green; }
     </style>
   </head>
   <body>
     <h1>Hold on!</h1>
     <div id="message"></div>
-    <div id="challengeBox" style="display: none;">
+    
+    <div id="mathBox" class="challenge-box">
       <p>Solve: <span id="mathQuestion"></span></p>
       <input type="number" id="mathAnswer" placeholder="Your answer" />
-      <button id="submitAnswer">Submit</button>
+      <button id="submitMathAnswer">Submit</button>
+    </div>
+
+    <div id="typingBox" class="challenge-box">
+      <p>Type the following text:</p>
+      <div id="typingText"></div>
+      <textarea id="typingInput" placeholder="Type here..."></textarea>
+      <button id="submitTypingAnswer">Submit</button>
+      <p id="typingFeedback"></p>
     </div>
 
     <script src="challenge.js"></script>

@@ -25,10 +25,21 @@
     </div>
 
     <div class="section">
-      <label>
-        <input type="checkbox" id="challenge" />
-        Require math challenge instead of waiting to time to run out?
-      </label>
+      <h3>Challenge Type:</h3>
+      <div class="challenge-options">
+        <label>
+          <input type="radio" name="challengeType" value="wait" checked />
+          Wait Timer
+        </label>
+        <label>
+          <input type="radio" name="challengeType" value="math" />
+          Math Challenge
+        </label>
+        <label>
+          <input type="radio" name="challengeType" value="typing" />
+          Typing Challenge
+        </label>
+      </div>
     </div>
 
     <div class="section">

@@ -2,7 +2,7 @@ const websiteInput = document.getElementById("websiteInput");
 const addWebsiteBtn = document.getElementById("addWebsite");
 const websitesListEl = document.getElementById("websitesList");
 const waitTimeInput = document.getElementById("waitTime");
-const challengeCheckbox = document.getElementById("challenge");
+const challengeTypeInputs = document.getElementsByName("challengeType");
 const saveSettingsBtn = document.getElementById("saveSettings");
 
 let websites = [];
@@ -28,7 +28,7 @@ function renderWebsites() {
 
 // load saved settings from storage when the options page is loaded
 document.addEventListener("DOMContentLoaded", () => {
-  chrome.storage.sync.get(["websites", "waitTime", "challenge"], (data) => {
+  chrome.storage.sync.get(["websites", "waitTime", "challengeType"], (data) => {
     if (data.websites) {
       websites = data.websites;
     }
@@ -37,7 +37,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (data.waitTime !== undefined) {
       waitTimeInput.value = data.waitTime;
     }
-    challengeCheckbox.checked = data.challenge || false;
+    
+    // Set the correct challenge type radio button
+    const challengeType = data.challengeType || "wait";
+    for (const input of challengeTypeInputs) {
+      if (input.value === challengeType) {
+        input.checked = true;
+        break;
+      }
+    }
   });
 });
 
@@ -59,10 +67,19 @@ saveSettingsBtn.addEventListener("click", () => {
 
   if (waitTime < 0 || isNaN(waitTime)) {
     alert("Please input a valid wait time in seconds that is 0 or greater!")
+    return;
   }
 
-  const challenge = challengeCheckbox.checked;
-  chrome.storage.sync.set({ websites, waitTime, challenge }, () => {
+  // Get the selected challenge type
+  let challengeType = "wait";
+  for (const input of challengeTypeInputs) {
+    if (input.checked) {
+      challengeType = input.value;
+      break;
+    }
+  }
+
+  chrome.storage.sync.set({ websites, waitTime, challengeType }, () => {
     alert("Settings saved!");
   });
 });
