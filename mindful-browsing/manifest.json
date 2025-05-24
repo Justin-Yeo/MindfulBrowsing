@@ -5,7 +5,8 @@
     "description": "Increase productivity by adding a wait time or challenge before accessing distracting websites.",
     "permissions": [
       "storage",
-      "tabs"
+      "tabs",
+      "alarms"
     ],
     "host_permissions": [
       "<all_urls>"
@@ -15,7 +16,8 @@
     },
     "options_page": "options.html",
     "action": {
-      "default_title": "Focus Wait"
+      "default_title": "Focus Wait",
+      "default_popup": "schedule.html"
     }
   }
   

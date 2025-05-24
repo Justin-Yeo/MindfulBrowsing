@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Schedule Manager - Mindful Browsing</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+  </head>
+  <body>
+    <div class="schedule-container">
+      <!-- Calendar View -->
+      <div class="calendar-section">
+        <h2>Schedule Calendar</h2>
+        <div id="calendar"></div>
+      </div>
+
+      <!-- Website Management and Fallback Settings -->
+      <div class="settings-section">
+        <div class="fallback-settings">
+          <h3>Fallback Challenge</h3>
+          <div class="fallback-controls">
+            <label class="switch">
+              <input type="checkbox" id="fallbackEnabled">
+              <span class="slider round"></span>
+            </label>
+            <span>Enable Fallback Challenge</span>
+          </div>
+          <div class="fallback-type">
+            <label for="fallbackType">Challenge Type:</label>
+            <select id="fallbackType">
+              <option value="wait">Wait Timer</option>
+              <option value="math">Math Challenge</option>
+              <option value="typing">Typing Challenge</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="websites-list">
+          <h3>Managed Websites</h3>
+          <ul id="websitesList"></ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for editing blocks -->
+    <div id="blockModal" class="modal">
+      <div class="modal-content">
+        <h3>Edit Schedule Block</h3>
+        <div class="modal-body">
+          <div class="time-section">
+            <label>Time:</label>
+            <input type="time" id="blockStartTime" step="1800"> to
+            <input type="time" id="blockEndTime" step="1800">
+          </div>
+          
+          <div class="days-section">
+            <label>Days:</label>
+            <div class="day-checkboxes">
+              <label><input type="checkbox" value="monday"> Mon</label>
+              <label><input type="checkbox" value="tuesday"> Tue</label>
+              <label><input type="checkbox" value="wednesday"> Wed</label>
+              <label><input type="checkbox" value="thursday"> Thu</label>
+              <label><input type="checkbox" value="friday"> Fri</label>
+              <label><input type="checkbox" value="saturday"> Sat</label>
+              <label><input type="checkbox" value="sunday"> Sun</label>
+            </div>
+          </div>
+
+          <div class="challenge-section">
+            <label for="blockChallengeType">Challenge Type:</label>
+            <select id="blockChallengeType">
+              <option value="wait">Wait Timer</option>
+              <option value="math">Math Challenge</option>
+              <option value="typing">Typing Challenge</option>
+            </select>
+          </div>
+
+          <div class="websites-section">
+            <label>Websites:</label>
+            <div id="blockWebsites" class="website-checkboxes"></div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="copyBlock">Copy to Other Days</button>
+          <button id="deleteBlock">Delete Block</button>
+          <button id="saveBlock">Save Changes</button>
+          <button id="closeModal">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="schedule.js"></script>
+  </body>
+</html> 
