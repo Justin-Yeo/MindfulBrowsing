@@ -18,9 +18,10 @@ MindfulBrowsing is a Chrome extension designed to help users stay focused by int
 5. The extension should now be installed and ready to use!
 
 ## How to Use 
-1. Click on the **MindfulBrowsing** icon in the Chrome toolbar.
-2. Add websites to your blocklist in the settings page.
-3. Choose your preferred restriction mode (wait time or math challenge).
+1. Click on the extensions icon in the Chrome toolbar.
+2. Click on the more actions button for **MindfulBrowsing** chrome extension (the 3 dot button) and navigate to 'options'.
+3. Add the websites you want to block.
+3. Choose your preferred restriction mode.
 4. When you visit a blocked website, complete the required action before gaining access.
 
 ## Permissions 
