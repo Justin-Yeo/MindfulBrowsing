@@ -7,28 +7,9 @@ const mindfulnessQuotes = [
   "Every morning we are born again. What we do today matters most."
 ];
 
-// Get current schedule block based on time and day
-function getCurrentScheduleBlock(scheduleBlocks, website) {
-  const now = new Date();
-  const currentTime = now.toTimeString().slice(0, 5);
-  const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-  const currentDay = days[now.getDay()];
-
-  return scheduleBlocks.find(block => {
-    // Check if block applies to current day
-    if (!block.days.includes(currentDay)) return false;
-    
-    // Check if block applies to current time
-    if (block.startTime > currentTime || block.endTime < currentTime) return false;
-    
-    // Check if block applies to current website
-    return block.websites.includes(website);
-  });
-}
-
-// Retrieve settings and determine challenge type
-chrome.storage.sync.get(['scheduleBlocks', 'fallbackChallenge', 'waitTime'], (settings) => {
-  chrome.storage.local.get(['originalURL', 'originalSite'], (data) => {
+// Retrieve settings and stored original URL and site
+chrome.storage.sync.get(["waitTime", "challengeType"], (settings) => {
+  chrome.storage.local.get(["originalURL", "originalSite"], (data) => {
     const originalURL = data.originalURL || "about:blank";
     const originalSite = data.originalSite;
 
@@ -37,36 +18,15 @@ chrome.storage.sync.get(['scheduleBlocks', 'fallbackChallenge', 'waitTime'], (se
       return;
     }
 
-    // Get current schedule block
-    const currentBlock = getCurrentScheduleBlock(settings.scheduleBlocks || [], originalSite);
-    
-    if (currentBlock) {
-      // Apply scheduled challenge
-      switch (currentBlock.challengeType) {
-        case 'math':
-          showMathChallenge(originalURL, originalSite);
-          break;
-        case 'typing':
-          showTypingChallenge(originalURL, originalSite);
-          break;
-        default:
-          startCountdown(settings.waitTime, originalURL, originalSite);
-      }
-    } else if (settings.fallbackChallenge && settings.fallbackChallenge.enabled) {
-      // Apply fallback challenge
-      switch (settings.fallbackChallenge.type) {
-        case 'math':
-          showMathChallenge(originalURL, originalSite);
-          break;
-        case 'typing':
-          showTypingChallenge(originalURL, originalSite);
-          break;
-        default:
-          startCountdown(settings.waitTime, originalURL, originalSite);
-      }
-    } else {
-      // No active schedule or fallback, allow access
-      redirectTo(originalURL);
+    switch (settings.challengeType) {
+      case "math":
+        showMathChallenge(originalURL, originalSite);
+        break;
+      case "typing":
+        showTypingChallenge(originalURL, originalSite);
+        break;
+      default:
+        startCountdown(settings.waitTime, originalURL, originalSite);
     }
   });
 });
